@@ -1,8 +1,11 @@
 <button
-  class="flex items-center font-roboto text-white border border-transparent bg-google-blue w-full"
+  ngClass="'
+    flex items-center w-full font-roboto text-white border border-transparent bg-google-blue active:bg-google-blue-dark
+    outline-none shadow-google-button hover:shadow-google-button-blue transition-shadow duration-300 rounded-1
+  '"
   (click)="auth.signIn()"
 >
-  <span class="bg-white p-4">
+  <span class="bg-white p-4 rounded-1">
     <img src="/assets/google-logo.svg" />
   </span>
 
