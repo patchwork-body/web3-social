@@ -1,16 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FirebaseService } from '@services/firebase.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
 })
-export class FeedComponent implements OnInit {
-  @Input() title!: string;
-
+export class FeedComponent {
   constructor(private firebase: FirebaseService) {}
-
-  ngOnInit(): void {
-    this.title += ' ' + this.firebase.app.name;
-  }
 }
