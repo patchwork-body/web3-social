@@ -7,10 +7,12 @@ import { environment } from '@environments/environment';
   providedIn: 'root',
 })
 export class FirebaseService {
-  app: FirebaseApp;
-  analytics: Analytics;
+  app: FirebaseApp | null = null;
+  analytics: Analytics | null = null;
 
-  constructor() {
+  constructor() {}
+
+  init() {
     this.app = initializeApp(environment.firebaseConfig);
     this.analytics = getAnalytics(this.app);
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@services/auth.service';
 import { FirebaseService } from '@services/firebase.service';
 
 @Component({
@@ -6,5 +7,5 @@ import { FirebaseService } from '@services/firebase.service';
   templateUrl: './feed.component.html',
 })
 export class FeedComponent {
-  constructor(private firebase: FirebaseService) {}
+  constructor(public auth: AuthService) {}
 }

@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '@services/firebase.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  constructor(private router: Router) {}
+export class AppComponent implements OnInit {
+  constructor(private firebase: FirebaseService) {}
+
+  ngOnInit(): void {
+    this.firebase.init();
+  }
 }

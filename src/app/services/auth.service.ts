@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Auth, getAuth, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { FirebaseService } from './firebase.service';
+import { Router } from '@angular/router';
+import {
+  Auth,
+  getAuth,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  User,
+  onAuthStateChanged,
+  useDeviceLanguage,
+} from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -8,18 +17,33 @@ import { FirebaseService } from './firebase.service';
 export class AuthService {
   provider: GoogleAuthProvider;
   auth: Auth;
+  user: User | null = null;
   accessToken?: string;
 
-  constructor(private firebase: FirebaseService) {
+  constructor(private router: Router) {
     this.provider = new GoogleAuthProvider();
     this.auth = getAuth();
-    this.auth.useDeviceLanguage();
+    useDeviceLanguage(this.auth);
+
+    onAuthStateChanged(this.auth, user => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
   }
 
   async signIn() {
-    const result = await signInWithPopup(this.auth, this.provider);
-    const credentials = GoogleAuthProvider.credentialFromResult(result);
-    this.accessToken = credentials?.accessToken;
+    try {
+      const result = await signInWithPopup(this.auth, this.provider);
+      const credentials = GoogleAuthProvider.credentialFromResult(result);
+      this.accessToken = credentials?.accessToken;
+      this.user = result.user;
+      this.router.navigate(['feed']);
+    } catch (error) {
+      // TODO: add error handling
+    }
   }
 
   async signOut() {
