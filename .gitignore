@@ -6,6 +6,8 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
+# truffle
+/build
 
 # dependencies
 /node_modules
@@ -23,8 +25,8 @@ chrome-profiler-events*.json
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-.history/*
+.vscode/
+.history/
 
 # misc
 /.angular/cache
@@ -37,6 +39,7 @@ yarn-error.log
 testem.log
 /typings
 firebase-debug.log
+ui-debug.log
 
 # System Files
 .DS_Store
